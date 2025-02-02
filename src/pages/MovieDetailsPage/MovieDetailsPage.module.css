@@ -1,0 +1,11 @@
+.casts, .reviews {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #cd65d9;
+  color: white;
+}
+.reviews {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}

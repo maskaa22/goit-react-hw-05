@@ -1,0 +1,14 @@
+.img {
+  width: 250px;
+  transition: filter 0.3s ease-in-out;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+.title, .range {
+padding: 5px 0;
+}
+.range {
+  color: red;
+}

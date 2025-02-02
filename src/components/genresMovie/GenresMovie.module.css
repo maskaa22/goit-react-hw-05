@@ -1,0 +1,7 @@
+.genres {
+  display: flex;
+  gap: 20px;
+}
+.genre {
+  letter-spacing: 0.5px;
+}

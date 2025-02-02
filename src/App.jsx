@@ -1,87 +1,56 @@
 import { useEffect, useState } from "react";
+import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import "./App.css";
-import SearchBar from "./components/searchBar/SearchBar";
-import ImageGallary from "./components/imageGallery/ImageGallery";
-import { fetchImage } from "./assets/galleryApi";
-import LoadMoreBtn from "./components/loadMoreBtn/LoadMoreBtn";
-import Loader from "./components/loader/Loader";
-import ErrorMessage from "./components/errorMessage/ErrorMessage";
-import ImageModal from "./components/imageModal/ImageModal";
+import Header from "./components/header/Header";
+import { trendsMovies } from "./assets/API";
+
+const MovieCasts = lazy(() => import("./components/movieCasts/MovieCasts"));
+const MovieReviews = lazy(() =>
+  import("./components/movieReviews/MovieReviews")
+);
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() =>
+  import("./pages/MovieDetailsPage/MovieDetailsPage")
+);
 
 function App() {
-  const [gallaryList, setGalleryList] = useState([]);
-  const [searchWord, setSearchWord] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorSearchFlag, setSearchFlag] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [errorSearchMessage, setErrorSearchMessage] = useState("");
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [dataForModal, setDataForModal] = useState({});
-
-  const onSubmit = (word) => {
-    setSearchWord(word);
-    setPage(1);
-    setGalleryList([]);
-  };
-  const loadMore = () => {
-    setPage((prev) => prev + 1);
-  };
+  const [trends, setTrends] = useState([]);
 
   useEffect(() => {
-    if (!searchWord) return;
-    const fetchQuery = async () => {
+    const fetchTrendsMovies = async () => {
       try {
-        setLoading(true);
-        const data = await fetchImage(searchWord, page);
-        setGalleryList((prev) => [...prev, ...data.results]);
+        const data = await trendsMovies();
+        setTrends(data);
+        
       } catch (err) {
-        setError(true);
-        setErrorMessage(err.message);
+        console.log(err);
+        
       } finally {
-        setLoading(false);
+        // console.log('Loading....');
+        
       }
     };
-    fetchQuery();
-  }, [searchWord, page]);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+    fetchTrendsMovies()
+  }, []);
 
   return (
     <>
-      <SearchBar
-        onSubmit={onSubmit}
-        err={setErrorSearchMessage}
-        flag={setSearchFlag}
-      />
-      {error ||
-        (errorSearchFlag && (
-          <ErrorMessage
-            errorMessage={
-              errorSearchMessage !== "" ? errorSearchMessage : errorMessage
-            }
-          />
-        ))}
-      {gallaryList.length > 0 && (
-        <ImageGallary
-          gallaryList={gallaryList}
-          openModal={openModal}
-          setDataForModal={setDataForModal}
-        />
-      )}
-      {gallaryList.length > 0 && <LoadMoreBtn loadMore={loadMore} />}
-      {loading && <Loader />}
-      <ImageModal
-        isOpen={modalIsOpen}
-        closeModal={closeModal}
-        data={dataForModal}
-      />
+      <Header />
+
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage movies={trends} />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCasts />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

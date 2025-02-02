@@ -1,0 +1,12 @@
+.header {
+  padding: 20px 40px;
+  border-bottom: 1px solid grey;
+}
+.link {
+  font-size: 24px;
+  padding: 20px;
+}
+.active {
+  color: white;
+  background-color: #cd65d9;
+}
