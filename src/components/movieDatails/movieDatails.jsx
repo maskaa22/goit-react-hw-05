@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import "react-circular-progressbar/dist/styles.css";
 import c from "./movieDatails.module.css";
 import { useEffect, useState } from "react";
@@ -12,6 +12,8 @@ import { IoMdArrowBack } from "react-icons/io";
 
 const MovieDetails = ({ movieId }) => {
   const [movie, setMovie] = useState({});
+  const location = useLocation();
+  const back = location.state ?? '/';
 
   useEffect(() => {
     const fetchselectedMovie = async () => {
@@ -37,7 +39,7 @@ const MovieDetails = ({ movieId }) => {
         backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${baseImageUrl}${movie.backdrop_path})`,
       }}
     >
-      <IoMdArrowBack className={c.back}/>
+      <Link to={back}><IoMdArrowBack className={c.back}/></Link>
       <img
         src={`${baseImageUrl}${movie.poster_path}`}
         className={c.img}

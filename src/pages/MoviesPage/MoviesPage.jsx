@@ -29,7 +29,6 @@ const MoviesPage = () => {
       };
       fetchTrendsMovies()
     }, [query]);
-     console.log(movies);
     
     const updateQueryString = (query) => {
       const nextParams = query !== "" ? { query } : {};
