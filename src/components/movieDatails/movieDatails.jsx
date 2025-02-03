@@ -7,6 +7,8 @@ import GenresMovie from "../genresMovie/GenresMovie";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import Progress from "../progress/Progress";
 import baseImageUrl from '../../assets/constants';
+import { IoMdArrowBack } from "react-icons/io";
+
 
 const MovieDetails = ({ movieId }) => {
   const [movie, setMovie] = useState({});
@@ -35,6 +37,7 @@ const MovieDetails = ({ movieId }) => {
         backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${baseImageUrl}${movie.backdrop_path})`,
       }}
     >
+      <IoMdArrowBack className={c.back}/>
       <img
         src={`${baseImageUrl}${movie.poster_path}`}
         className={c.img}

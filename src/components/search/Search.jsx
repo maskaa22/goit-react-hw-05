@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import c from "./Search.module.css";
 
 const Search = ({ onSubmit }) => {
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,25 +10,17 @@ const Search = ({ onSubmit }) => {
     if (form.elements.search.value.trim() === "") {
       // err("Please enter search term!");
       console.log("Please enter search term!");
-      
+
       return;
     }
     onSubmit(search);
-    // flag(true);
     form.reset();
   };
-
-  // const [search, setSearch] = useState("");
 
   return (
     <>
       <form className={c.form} onSubmit={handleSubmit}>
-        <input
-        name="search"
-          // value={search}
-          // onChange={(e) => setSearch(e.target.value)}
-          className={c.input}
-        />
+        <input name="search" className={c.input} />
         <button className={c.submit} type="submit">
           <CiSearch />
         </button>

@@ -1,7 +1,6 @@
 import c from "./MovieDetailsPage.module.css";
 import MovieDetails from "../../components/movieDatails/movieDatails";
 import { Link, Outlet, useParams } from "react-router-dom";
-import MovieReviews from "../../components/movieReviews/MovieReviews";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -12,10 +11,9 @@ const MovieDetailsPage = () => {
       <div className="container">
  
         <Link to={`/movies/${movieId}/cast`} className={c.casts}>Casts</Link>
-        
-        <button className={c.reviews}>Reviews</button>
+        <Link to={`/movies/${movieId}/reviews`} className={c.reviews}>Reviews</Link>
+
         <Outlet />
-        <MovieReviews />
       </div>
     </section>
   );
