@@ -5,6 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import "./App.css";
 import Header from "./components/header/Header";
 import { trendsMovies } from "./assets/API";
+import Loader from './components/loader/Loader';
 
 const MovieCasts = lazy(() => import("./components/movieCasts/MovieCasts"));
 const MovieReviews = lazy(() =>
@@ -18,10 +19,12 @@ const MovieDetailsPage = lazy(() =>
 
 function App() {
   const [trends, setTrends] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTrendsMovies = async () => {
       try {
+        setLoading(true);
         const data = await trendsMovies();
         setTrends(data);
         
@@ -29,7 +32,7 @@ function App() {
         console.log(err);
         
       } finally {
-        // console.log('Loading....');
+        setLoading(false);
         
       }
     };
@@ -39,8 +42,8 @@ function App() {
   return (
     <>
       <Header />
-
-      <Suspense fallback={<div>Loading page...</div>}>
+      
+      <Suspense fallback={loading && <Loader />}>
         <Routes>
           <Route path="/" element={<HomePage movies={trends} />} />
           <Route path="/movies" element={<MoviesPage />} />

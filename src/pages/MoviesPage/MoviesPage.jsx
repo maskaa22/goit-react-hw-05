@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { serchMovie } from '../../assets/API';
 import { useSearchParams } from 'react-router-dom';
 import Movies from '../../components/movies/Movies';
+import Loader from '../../components/loader/Loader';
 
 const MoviesPage = () => {
   // const [searchWord, setSearchWord] = useState(null);
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
   const query = searchParams.get("query");
 
@@ -16,6 +18,7 @@ const MoviesPage = () => {
       const fetchTrendsMovies = async () => {
         try {
           if(!query) return;
+          setLoading(true);
           const data = await serchMovie(query);
           setMovies(data);
           
@@ -23,7 +26,7 @@ const MoviesPage = () => {
           console.log(err);
           
         } finally {
-          // console.log('Loading....');
+          setLoading(false);
           
         }
       };
@@ -38,6 +41,7 @@ const MoviesPage = () => {
   return (
     <div className='container'>
       <Search onSubmit={updateQueryString}/>
+      {loading && <Loader />}
       <Movies movies={movies}/>
     </div>
   );

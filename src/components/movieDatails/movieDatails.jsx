@@ -8,22 +8,25 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import Progress from "../progress/Progress";
 import baseImageUrl from '../../assets/constants';
 import { IoMdArrowBack } from "react-icons/io";
+import Loader from '../loader/Loader';
 
 
 const MovieDetails = ({ movieId }) => {
   const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const back = location.state ?? '/';
 
   useEffect(() => {
     const fetchselectedMovie = async () => {
       try {
+        setLoading(true);
         const data = await selectedMovie(movieId);
         setMovie(data);
       } catch (err) {
         console.log(err);
       } finally {
-        // console.log("Loading....");
+        setLoading(false);
       }
     };
     fetchselectedMovie();
@@ -33,6 +36,8 @@ const MovieDetails = ({ movieId }) => {
   const data = new Date(movie.release_date).getFullYear();
 
   return (
+    <>
+    {loading && <Loader />}
     <div
       className={c.box}
       style={{
@@ -56,6 +61,8 @@ const MovieDetails = ({ movieId }) => {
         <GenresMovie genres={movie.genres} id={movieId} />
       </div>
     </div>
+    </>
+    
   );
 };
 export default MovieDetails;

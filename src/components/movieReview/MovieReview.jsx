@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import baseImageUrl from "../../assets/constants";
 
 const MovieReview = ({ review }) => {
-  console.log(review);
+
 const data = new Date(review.created_at).toLocaleDateString()
   return (
     <>
