@@ -9,9 +9,12 @@ const MovieDetailsPage = () => {
     <section className="heroMovie">
       <MovieDetails movieId={movieId} />
       <div className="container">
- 
-        <Link to={`/movies/${movieId}/cast`} className={c.casts}>Casts</Link>
-        <Link to={`/movies/${movieId}/reviews`} className={c.reviews}>Reviews</Link>
+        <Link to={`/movies/${movieId}/cast`} className={c.casts}>
+          Casts
+        </Link>
+        <Link to={`/movies/${movieId}/reviews`} className={c.reviews}>
+          Reviews
+        </Link>
 
         <Outlet />
       </div>

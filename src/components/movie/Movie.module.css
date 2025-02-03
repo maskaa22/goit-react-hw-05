@@ -9,9 +9,10 @@
   margin-top: 10px;
   padding: 0 10px 10px;
 }
-.title, .range {
-padding: 5px 0;
-max-width: 200px;
+.title,
+.range {
+  padding: 5px 0;
+  max-width: 200px;
 }
 .range {
   color: red;

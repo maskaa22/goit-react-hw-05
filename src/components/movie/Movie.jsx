@@ -1,5 +1,5 @@
 import c from "./Movie.module.css";
-import baseImageUrl from '../../assets/constants';
+import baseImageUrl from "../../assets/constants";
 
 const HomePage = ({ movie }) => {
   return (

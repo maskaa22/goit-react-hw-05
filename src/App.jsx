@@ -5,7 +5,8 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import "./App.css";
 import Header from "./components/header/Header";
 import { trendsMovies } from "./assets/API";
-import Loader from './components/loader/Loader';
+import Loader from "./components/loader/Loader";
+import ErrorMessage from "./components/errorMessage/ErrorMessage";
 
 const MovieCasts = lazy(() => import("./components/movieCasts/MovieCasts"));
 const MovieReviews = lazy(() =>
@@ -20,6 +21,8 @@ const MovieDetailsPage = lazy(() =>
 function App() {
   const [trends, setTrends] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchTrendsMovies = async () => {
@@ -27,22 +30,21 @@ function App() {
         setLoading(true);
         const data = await trendsMovies();
         setTrends(data);
-        
       } catch (err) {
-        console.log(err);
-        
+        setError(true);
+        setErrorMessage(err.message);
       } finally {
         setLoading(false);
-        
       }
     };
-    fetchTrendsMovies()
+    fetchTrendsMovies();
   }, []);
 
   return (
     <>
       <Header />
-      
+      {error && <ErrorMessage errorMessage={errorMessage} />}
+
       <Suspense fallback={loading && <Loader />}>
         <Routes>
           <Route path="/" element={<HomePage movies={trends} />} />

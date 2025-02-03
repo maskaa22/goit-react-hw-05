@@ -1,10 +1,4 @@
-import c from './NotFoundPage.module.css';
-
- const NotFoundPage = () => {
-  return (
-    <div className={'c.container'}>
-
-    </div>
-  );
+const NotFoundPage = () => {
+  return <div>Sory. Page not found</div>;
 };
 export default NotFoundPage;

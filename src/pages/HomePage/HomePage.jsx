@@ -1,12 +1,11 @@
-import c from './HomePage.module.css';
-import Movies from '../../components/movies/Movies';
+import c from "./HomePage.module.css";
+import Movies from "../../components/movies/Movies";
 
-const HomePage = ({movies}) => {
-  
+const HomePage = ({ movies }) => {
   return (
-    <div className='container'>
+    <div className="container">
       <h1 className={c.title}>Trending today</h1>
-      <Movies movies={movies}/>
+      <Movies movies={movies} />
     </div>
   );
 };

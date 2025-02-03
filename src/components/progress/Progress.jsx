@@ -12,7 +12,7 @@ const Progress = ({ average }) => {
         styles={buildStyles({
           pathColor: "#cd65d9",
           textColor: "#fff",
-          textSize: "30px"
+          textSize: "30px",
         })}
       />
     </div>

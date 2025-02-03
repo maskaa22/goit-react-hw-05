@@ -3,8 +3,7 @@ import { FaUser } from "react-icons/fa";
 import baseImageUrl from "../../assets/constants";
 
 const MovieReview = ({ review }) => {
-
-const data = new Date(review.created_at).toLocaleDateString()
+  const data = new Date(review.created_at).toLocaleDateString();
   return (
     <>
       <div className={c.user}>
@@ -14,9 +13,11 @@ const data = new Date(review.created_at).toLocaleDateString()
             className={c.img}
           />
         ) : (
-          <div className={c.iconContainer}><FaUser className={c.icon} /></div>
+          <div className={c.iconContainer}>
+            <FaUser className={c.icon} />
+          </div>
         )}
-      
+
         <p className={c.author}>{review.author}</p>
       </div>
       <p className={c.content}>{review.content}</p>

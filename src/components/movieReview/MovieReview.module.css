@@ -8,12 +8,12 @@
 }
 .iconContainer {
   height: 100px;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #dbdbdb;
-    border-radius: 20px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dbdbdb;
+  border-radius: 20px;
 }
 .icon {
   width: 50px;
