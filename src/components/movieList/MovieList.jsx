@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import c from "./Movies.module.css";
+import c from "./MovieList.module.css";
 import Movie from "../movie/Movie";
 
-const HomePage = ({ movies }) => {
+const MovieList = ({ movies }) => {
   const location = useLocation();
 
   return (
@@ -17,4 +17,4 @@ const HomePage = ({ movies }) => {
     </ul>
   );
 };
-export default HomePage;
+export default MovieList;

@@ -2,7 +2,7 @@ import Search from "../../components/search/Search";
 import { useEffect, useState } from "react";
 import { serchMovie } from "../../assets/API";
 import { useSearchParams } from "react-router-dom";
-import Movies from "../../components/movies/Movies";
+import MovieList from "../../components/movieList/MovieList";
 import Loader from "../../components/loader/Loader";
 import ErrorMessage from "../../components/errorMessage/ErrorMessage";
 
@@ -12,8 +12,6 @@ const MoviesPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [errorSearchFlag, setSearchFlag] = useState(false);
-  const [errorSearchMessage, setErrorSearchMessage] = useState("");
 
   const query = searchParams.get("query");
 
@@ -41,21 +39,10 @@ const MoviesPage = () => {
 
   return (
     <div className="container">
-      <Search
-        onSubmit={updateQueryString}
-        err={setErrorSearchMessage}
-        flag={setSearchFlag}
-      />
-      {error ||
-        (errorSearchFlag && (
-          <ErrorMessage
-            errorMessage={
-              errorSearchMessage !== "" ? errorSearchMessage : errorMessage
-            }
-          />
-        ))}
+      <Search onSubmit={updateQueryString} />
+      {error || <ErrorMessage errorMessage={errorMessage} />}
       {loading && <Loader />}
-      <Movies movies={movies} />
+      <MovieList movies={movies} />
     </div>
   );
 };
