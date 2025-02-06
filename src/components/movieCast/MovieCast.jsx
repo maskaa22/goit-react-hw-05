@@ -8,7 +8,7 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 import { FaUserSecret } from "react-icons/fa6";
 import baseImageUrl from "../../assets/constants";
 
-const MovieCasts = () => {
+const MovieCast = () => {
   const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -63,4 +63,4 @@ const MovieCasts = () => {
     </>
   );
 };
-export default MovieCasts;
+export default MovieCast;
