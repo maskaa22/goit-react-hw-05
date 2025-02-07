@@ -1,6 +1,6 @@
 import c from "./MovieDetailsPage.module.css";
 import { Link, Outlet, useParams, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "react-circular-progressbar/dist/styles.css";
 import { selectedMovie } from "../../assets/API";
 import ErrorMessage from "../../components/errorMessage/ErrorMessage";
@@ -19,6 +19,7 @@ const MovieDetailsPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const back = location.state ?? "/movies";
+  const hrefBack = useRef(back)
 
   useEffect(() => {
     const fetchselectedMovie = async () => {
@@ -51,7 +52,7 @@ const MovieDetailsPage = () => {
             backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${baseImageUrl}${movie.backdrop_path})`,
           }}
         >
-          <Link to={back}>
+          <Link to={hrefBack.current}>
             <IoMdArrowBack className={c.back} />
           </Link>
           <img
